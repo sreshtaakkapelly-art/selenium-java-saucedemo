@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.saucedemo.config.ConfigReader;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,8 +70,13 @@ public class CartPage {
         }
     }
 
+    public CheckoutPage clickCheckout() {
+        driver.findElement(By.id("checkout")).click();
+        return new CheckoutPage(driver);
+    }
+
     public ProductsPage continueShopping() {
-        continueShoppingButton.click();
+        driver.findElement(By.id("continue-shopping")).click();
         return new ProductsPage(driver);
     }
 
@@ -82,5 +88,10 @@ public class CartPage {
 
     public boolean isCartEmpty() {
         return cartItems.isEmpty();
+    }
+    public List<String> getCartItemNames() {
+        return cartItemNames.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 }

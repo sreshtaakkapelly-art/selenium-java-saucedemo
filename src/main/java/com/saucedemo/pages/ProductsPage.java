@@ -114,7 +114,7 @@ public class ProductsPage {
     }
 
     public CartPage goToCart() {
-        cartIcon.click();
+        driver.findElement(By.className("shopping_cart_link")).click();
         return new CartPage(driver);
     }
 
