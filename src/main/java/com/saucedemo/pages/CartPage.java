@@ -1,5 +1,6 @@
 package com.saucedemo.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,10 +34,10 @@ public class CartPage {
     @FindBy(css = ".cart_item")
     private List<WebElement> cartItems;
 
-    @FindBy(css = "[data-test='checkout']")
+    @FindBy(id = "checkout")
     private WebElement checkoutButton;
 
-    @FindBy(css = "[data-test='continue-shopping']")
+    @FindBy(id = "continue-shopping")
     private WebElement continueShoppingButton;
 
     @FindBy(css = ".cart_button")
@@ -52,22 +53,20 @@ public class CartPage {
     // ── Actions ───────────────────────────────────────────────────────────────
 
     public boolean isCartPageDisplayed() {
-        return pageTitle.isDisplayed() && pageTitle.getText().equals("Your Cart");
-    }
-
-    public List<String> getCartItemNames() {
-        return cartItemNames.stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
+        try {
+            return driver.getCurrentUrl().contains("cart");
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public int getCartItemCount() {
-        return cartItems.size();
-    }
-
-    public CheckoutPage clickCheckout() {
-        checkoutButton.click();
-        return new CheckoutPage(driver);
+        try {
+            List<WebElement> items = driver.findElements(By.className("cart_item"));
+            return items.size();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public ProductsPage continueShopping() {

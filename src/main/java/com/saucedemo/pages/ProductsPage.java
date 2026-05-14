@@ -90,11 +90,15 @@ public class ProductsPage {
     }
 
     public void addProductToCartByName(String productName) {
-        WebElement addButton = driver.findElement(By.xpath(
-                "//div[text()='" + productName + "']" +
-                        "/ancestor::div[contains(@class,'inventory_item')]" +
-                        "//button[contains(@class,'btn_inventory')]"));
-        addButton.click();
+        List<WebElement> names = driver.findElements(By.className("inventory_item_name"));
+        List<WebElement> buttons = driver.findElements(By.className("btn_inventory"));
+        for (int i = 0; i < names.size(); i++) {
+            if (names.get(i).getText().equals(productName)) {
+                buttons.get(i).click();
+                return;
+            }
+        }
+        throw new RuntimeException("Product not found: " + productName);
     }
 
     public void addFirstProductToCart() {
