@@ -33,10 +33,10 @@ public class CartPage {
     @FindBy(css = ".cart_item")
     private List<WebElement> cartItems;
 
-    @FindBy(id = "checkout")
+    @FindBy(css = "[data-test='checkout']")
     private WebElement checkoutButton;
 
-    @FindBy(id = "continue-shopping")
+    @FindBy(css = "[data-test='continue-shopping']")
     private WebElement continueShoppingButton;
 
     @FindBy(css = ".cart_button")

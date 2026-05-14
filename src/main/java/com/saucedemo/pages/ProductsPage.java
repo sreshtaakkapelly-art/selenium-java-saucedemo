@@ -90,10 +90,10 @@ public class ProductsPage {
     }
 
     public void addProductToCartByName(String productName) {
-        WebElement addButton = driver.findElement(
-                By.xpath("//div[text()='" + productName +
-                        "']/ancestor::div[@class='inventory_item']" +
-                        "//button[contains(text(),'Add to cart')]"));
+        WebElement addButton = driver.findElement(By.xpath(
+                "//div[text()='" + productName + "']" +
+                        "/ancestor::div[contains(@class,'inventory_item')]" +
+                        "//button[contains(@class,'btn_inventory')]"));
         addButton.click();
     }
 

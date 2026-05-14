@@ -31,7 +31,7 @@ public class CheckoutPage {
     @FindBy(id = "postal-code")
     private WebElement postalCodeField;
 
-    @FindBy(id = "continue")
+    @FindBy(css = "[data-test='continue']")
     private WebElement continueButton;
 
     @FindBy(css = "[data-test='error']")
