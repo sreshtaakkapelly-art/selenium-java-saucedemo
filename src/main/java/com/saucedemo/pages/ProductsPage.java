@@ -90,10 +90,11 @@ public class ProductsPage {
     }
 
     public void addProductToCartByName(String productName) {
-        // Find the specific product card and click its Add to Cart button
-        WebElement product = driver.findElement(
-            By.xpath("//div[text()='" + productName + "']/ancestor::div[@class='inventory_item']//button"));
-        product.click();
+        WebElement addButton = driver.findElement(
+                By.xpath("//div[text()='" + productName +
+                        "']/ancestor::div[@class='inventory_item']" +
+                        "//button[contains(text(),'Add to cart')]"));
+        addButton.click();
     }
 
     public void addFirstProductToCart() {
